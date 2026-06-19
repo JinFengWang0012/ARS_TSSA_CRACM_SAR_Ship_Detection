@@ -1,4 +1,4 @@
-train_cfg = dict(type='EpochBasedTrainLoop', max_epochs=36, val_interval=1)
+train_cfg = dict(type='EpochBasedTrainLoop', max_epochs=150, val_interval=1)
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
@@ -7,9 +7,9 @@ param_scheduler = [
     dict(
         type='MultiStepLR',
         begin=0,
-        end=36,
+        end=150,
         by_epoch=True,
-        milestones=[24, 33],
+        milestones=[100, 135],
         gamma=0.1)
 ]
 

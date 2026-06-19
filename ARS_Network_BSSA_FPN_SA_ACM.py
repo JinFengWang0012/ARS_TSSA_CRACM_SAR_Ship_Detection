@@ -43,7 +43,7 @@ model = dict(
         type='ResNet50_PyramidAttnFusion',
         in_channels=[256, 512, 1024, 2048],
         out_channels=256,
-        start_level=1,
+        start_level=0,
         num_outs=5,
         reduction_ratio=4,
         alpha_init=0.1,
@@ -54,7 +54,7 @@ model = dict(
         in_channels=256,
         stacked_convs=4,
         feat_channels=256,
-        strides=[8, 16, 32, 64, 128],
+        strides=[4, 8, 16, 32, 64],
         regress_ranges=((-1, 64), (64, 128), (128, 256), (256, 512),
                         (512, 100000000)),
         center_sampling=True,
@@ -118,9 +118,9 @@ param_scheduler = [
     dict(
         type='MultiStepLR',
         begin=0,
-        end=36,
+        end=150,
         by_epoch=True,
-        milestones=[28, 33],
+        milestones=[100, 135],
         gamma=0.1)
 ]
 
