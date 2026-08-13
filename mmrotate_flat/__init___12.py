@@ -27,7 +27,7 @@ from .rotated_rtmdet_head import RotatedRTMDetHead, RotatedRTMDetSepBNHead
 from .s2a_head import S2AHead, S2ARefineHead
 from .sam_reppoints_head import SAMRepPointsHead
 from .CDangle_branch_retina_head import CDAngleBranchRetinaHead
-# from .regloss_no_sa_acmangle_branch_retina_head import REGLOSSNOSAACMAngleBranchRetinaHead
+# from .regloss_no_cracmangle_branch_retina_head import REGLOSSNOCRACMAngleBranchRetinaHead
 __all__ = [
     'RotatedRetinaHead', 'OrientedRPNHead', 'RotatedRepPointsHead',
     'SAMRepPointsHead', 'AngleBranchRetinaHead', 'RotatedATSSHead',

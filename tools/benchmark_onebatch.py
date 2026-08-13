@@ -136,18 +136,18 @@ ABLATION_CONFIGS = {
 
 COMPARISON_TABLES = {
     'backbone': {
-        'SE': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_ResNet50_PyramidAttnFusion_SAACM_SE.py',
-        'CBAM': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_ResNet50_PyramidAttnFusion_SAACM_CBAM.py',
-        'ECA': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_ResNet50_PyramidAttnFusion_SAACM_ECA.py',
+        'SE': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_ResNet50_PyramidAttnFusion_CRACM_SE.py',
+        'CBAM': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_ResNet50_PyramidAttnFusion_CRACM_CBAM.py',
+        'ECA': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_ResNet50_PyramidAttnFusion_CRACM_ECA.py',
     },
     'neck': {
-        'PAFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_SAACM_PAFPN.py',
-        'NAS-FPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_SAACM_NASFPN.py',
-        'BiFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_SAACM_BiFPN.py',
-        'AugFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_SAACM_AugFPN.py',
-        'GraphFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_SAACM_GraphFPN.py',
-        'RFFP-Neck': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_SAACM_RFFPNeck.py',
-        'SPAFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_SAACM_SPAFPN.py',
+        'PAFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_CRACM_PAFPN.py',
+        'NAS-FPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_CRACM_NASFPN.py',
+        'BiFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_CRACM_BiFPN.py',
+        'AugFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_CRACM_AugFPN.py',
+        'GraphFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_CRACM_GraphFPN.py',
+        'RFFP-Neck': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_CRACM_RFFPNeck.py',
+        'SPAFPN': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-r50_attnres_stage_backbone_CRACM_SPAFPN.py',
     },
     'angle': {
         'CSL': ROOT / 'configs' / 'sar-wjf' / 'rotated-fcos-rsdd-r50_attnres_pyramid_backbone_RotatedFCOSHead_CSL.py',
@@ -157,8 +157,8 @@ COMPARISON_TABLES = {
     }
     ,
     'module_ablation': {
-        '-Backbone (ResNet50)': ROOT / 'configs' / 'sar-wjf' / 'ablation_minus_backbone_resnet50_pyramidattn_saacm.py',
-        '-Neck (FPN)': ROOT / 'configs' / 'sar-wjf' / 'ablation_minus_neck_fpn_attnres_saacm.py',
+        '-Backbone (ResNet50)': ROOT / 'configs' / 'sar-wjf' / 'ablation_minus_backbone_resnet50_pyramidattn_CRACM.py',
+        '-Neck (FPN)': ROOT / 'configs' / 'sar-wjf' / 'ablation_minus_neck_fpn_attnres_CRACM.py',
     }
 }
 
