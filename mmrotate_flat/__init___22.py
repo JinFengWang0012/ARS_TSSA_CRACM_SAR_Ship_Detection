@@ -9,8 +9,8 @@ from .delta_xywht_rbbox_coder import DeltaXYWHTRBBoxCoder
 from .distance_angle_point_coder import DistanceAnglePointCoder
 from .gliding_vertex_coder import GVFixCoder, GVRatioCoder
 from .cf_ucr_angle_coder import CFUCRAngleCoder
-#                                             ↑ 这里多加一个
-from .cf_ucr_angle_coder import CFUCRAngleCoder
+from .cracm_angle_coder import CRACMCoder
+#                                             �?这里多加一�?from .cf_ucr_angle_coder import CFUCRAngleCoder
 
 
 __all__ = [
@@ -18,5 +18,5 @@ __all__ = [
     'GVFixCoder', 'GVRatioCoder', 'CSLCoder', 'PSCCoder', 'ACMCoder',
     'CDMCoder', 'UCResolver',
     'DistanceAnglePointCoder', 'DeltaXYWHHBBoxCoder', 'DeltaXYWHQBBoxCoder',
-    'PseudoAngleCoder', 'CFUCRAngleCoder'
+    'PseudoAngleCoder', 'CFUCRAngleCoder', 'CRACMCoder'
 ]

@@ -10,12 +10,12 @@ from .smooth_focal_loss import SmoothFocalLoss
 from .spatial_border_loss import SpatialBorderLoss
 from .csl_ucr_loss import CSLUCRLoss 
 from .cf_ucr_angle_loss import CFUCRAngleLoss
-from .acm_consistency_loss import ACMConsistencyLoss
+from .acm_consistency_loss import ACMConsistencyLoss, CRACMConsistencyLoss
 from .gaucho_gd_loss import GauChoGDLoss
 
 __all__ = [
     'GDLoss', 'GDLoss_v1', 'KFLoss', 'ConvexGIoULoss', 'BCConvexGIoULoss',
     'SmoothFocalLoss', 'RotatedIoULoss', 'SpatialBorderLoss',
     'H2RBoxConsistencyLoss', 'H2RBoxV2ConsistencyLoss', 'CSLUCRLoss',
-    'CFUCRAngleLoss', 'ACMConsistencyLoss', 'GauChoGDLoss'
+    'CFUCRAngleLoss', 'ACMConsistencyLoss', 'CRACMConsistencyLoss', 'GauChoGDLoss'
 ]

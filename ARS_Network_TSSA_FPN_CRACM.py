@@ -1,14 +1,16 @@
 custom_imports = dict(
     imports=[
         'mmrotate.models.backbones.attnres_stage_backbone',
-        'mmrotate.models.necks.resnet50_pyramid_attn_fusion',
+        'mmrotate.models.necks.resnet50_semantic_spatial_rotation_pyramid_attn_fusion',
+        'mmrotate.models.task_modules.coders.cracm_angle_coder',
+        'mmrotate.models.losses.acm_consistency_loss',
     ],
     allow_failed_imports=False)
 
 _base_ = [
-    '../_base_/datasets/ssdd.py',
-    '../_base_/schedules/schedule_3x.py',
-    '../_base_/default_runtime.py'
+    'configs/_base_/datasets/ssdd.py',
+    'configs/_base_/schedules/schedule_3x.py',
+    'configs/_base_/default_runtime.py'
 ]
 
 angle_version = 'le90'
@@ -23,7 +25,7 @@ model = dict(
         pad_size_divisor=32,
         boxtype2tensor=False),
     backbone=dict(
-        type='attnres_stage_backbone',
+        type='ARSNetwork',
         depth=50,
         num_stages=4,
         out_indices=(0, 1, 2, 3),
@@ -40,7 +42,7 @@ model = dict(
         use_gate=False,
         init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50')),
     neck=dict(
-        type='ResNet50_PyramidAttnFusion',
+        type='TSSAFPN',
         in_channels=[256, 512, 1024, 2048],
         out_channels=256,
         start_level=0,
@@ -67,7 +69,7 @@ model = dict(
             type='DistanceAnglePointCoder',
             angle_version=angle_version),
         angle_coder=dict(
-            type='ACMCoder',
+            type='CRACMCoder',
             angle_version=angle_version,
             base_omega=2,
             dual_freq=True),
@@ -81,7 +83,7 @@ model = dict(
             type='RotatedIoULoss',
             loss_weight=1.0),
         loss_angle=dict(
-            type='ACMConsistencyLoss',
+            type='CRACMConsistencyLoss',
             beta=0.1111111111111111,
             reg_weight=1.0,
             unit_circle_weight=0.02,

@@ -19,7 +19,7 @@ def acm_consistency_loss(pred: Tensor,
                          phase_consistency_weight: float = 0.05,
                          reduction: str = 'mean',
                          avg_factor: Optional[float] = None) -> Tensor:
-    """ACM angle loss with light consistency regularization.
+    """CR-ACM angle loss with consistency regularization.
 
     The head still predicts the standard ACM code
     ``[cos(2a), sin(2a), cos(4a), sin(4a)]``. Besides encoded-angle
@@ -30,7 +30,7 @@ def acm_consistency_loss(pred: Tensor,
         return pred.sum()
 
     assert pred.size(-1) == 4 and target.size(-1) == 4, \
-        'ACMConsistencyLoss expects 4-D ACM codes.'
+        'CRACMConsistencyLoss expects 4-D CR-ACM codes.'
 
     reg = F.smooth_l1_loss(pred, target, beta=beta, reduction='none')
     reg = weight_reduce_loss(reg, weight, reduction, avg_factor)
@@ -53,7 +53,7 @@ def acm_consistency_loss(pred: Tensor,
 
 @MODELS.register_module()
 class ACMConsistencyLoss(nn.Module):
-    """Lightweight ACM loss for unchanged RotatedFCOSHead."""
+    """Consistency-Regularized Angle Modeling loss."""
 
     def __init__(self,
                  beta: float = 1.0 / 9.0,
@@ -93,3 +93,9 @@ class ACMConsistencyLoss(nn.Module):
             reduction=reduction,
             avg_factor=avg_factor)
         return self.loss_weight * loss
+
+@MODELS.register_module(name='CRACMConsistencyLoss')
+class CRACMConsistencyLoss(ACMConsistencyLoss):
+    """Paper-name alias for Consistency-Regularized Angle Modeling."""
+
+    pass

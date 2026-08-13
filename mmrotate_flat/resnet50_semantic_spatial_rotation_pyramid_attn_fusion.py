@@ -238,3 +238,9 @@ class ResNet50_SemanticSpatialRotationPyramidAttnFusion(nn.Module):
                 outs.append(x)
 
         return tuple(outs)
+
+@MODELS.register_module(name='TSSAFPN')
+class TSSAFPN(ResNet50_SemanticSpatialRotationPyramidAttnFusion):
+    """Paper-name alias for Target-Aware Semantic-Spatial Adaptive FPN."""
+
+    pass

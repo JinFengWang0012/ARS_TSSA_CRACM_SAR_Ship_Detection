@@ -276,3 +276,9 @@ class AttnResStageBackbone(ResNet):
             if i in self.out_indices:
                 outs.append(x)
         return tuple(outs)
+
+@MODELS.register_module(name='ARSNetwork')
+class ARSNetwork(AttnResStageBackbone):
+    """Paper-name alias for the Attention Residual Stage Network."""
+
+    pass
