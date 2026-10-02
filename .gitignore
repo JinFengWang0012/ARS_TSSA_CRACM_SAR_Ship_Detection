@@ -1,9 +1,0 @@
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.DS_Store
-
-# Exclude original backup archives from GitHub uploads.
-artifacts/archives/mmrotate-CDM-main_no_pth_no_txt.zip
-artifacts/archives/mmrotate-CDM-main_no_pth_no_txt (1).zip
