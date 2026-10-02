@@ -1,9 +1,9 @@
 custom_imports = dict(
     imports=[
-        'mmrotate.models.backbones.attnres_stage_backbone',
-        'mmrotate.models.necks.resnet50_semantic_spatial_rotation_pyramid_attn_fusion',
-        'mmrotate.models.task_modules.coders.cracm_angle_coder',
-        'mmrotate.models.losses.acm_consistency_loss',
+        'mmrotate_flat.attnres_stage_backbone',
+        'mmrotate_flat.resnet50_semantic_spatial_rotation_pyramid_attn_fusion',
+        'mmrotate_flat.cracm_angle_coder',
+        'mmrotate_flat.acm_consistency_loss',
     ],
     allow_failed_imports=False)
 
@@ -34,12 +34,12 @@ model = dict(
         norm_eval=True,
         style='pytorch',
         use_attnres=True,
-        attn_embed_channels=512,
-        reduction_ratio=8,
+        attn_embed_channels=256,
+        reduction_ratio=4,
         alpha_init=0.1,
-        history_k=1,
+        history_k=4,
         attn_start_stage=1,
-        use_gate=False,
+        use_gate=True,
         init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50')),
     neck=dict(
         type='TSSAFPN',
@@ -122,7 +122,7 @@ param_scheduler = [
         begin=0,
         end=150,
         by_epoch=True,
-        milestones=[100, 135],
+        milestones=[28, 33],
         gamma=0.1)
 ]
 
@@ -135,3 +135,47 @@ default_hooks = dict(
         max_keep_ckpts=3,
         save_best='r_coco/bbox_mAP_50',
         rule='greater'))
+
+# Paper training protocol. These overrides intentionally stay in this main
+# configuration so that the reusable base dataset configuration is unchanged.
+train_pipeline = [
+    dict(type='LoadImageFromFile', backend_args=None),
+    dict(type='LoadAnnotations', with_bbox=True),
+    dict(type='Resize', scale=(512, 512), keep_ratio=True),
+    dict(
+        type='RandomFlip',
+        prob=0.75,
+        direction=['horizontal', 'vertical', 'diagonal']),
+    dict(type='PackDetInputs')
+]
+
+test_pipeline = [
+    dict(type='LoadImageFromFile', backend_args=None),
+    dict(type='LoadAnnotations', with_bbox=True),
+    dict(type='Resize', scale=(512, 512), keep_ratio=True),
+    dict(
+        type='PackDetInputs',
+        meta_keys=('img_id', 'img_path', 'ori_shape', 'img_shape',
+                   'scale_factor'))
+]
+
+train_dataloader = dict(batch_size=4, dataset=dict(pipeline=train_pipeline))
+val_dataloader = dict(
+    batch_size=8,
+    dataset=dict(ann_file='json_records/val.json', pipeline=test_pipeline))
+test_dataloader = dict(
+    batch_size=8,
+    dataset=dict(ann_file='json_records/test.json', pipeline=test_pipeline))
+
+val_evaluator = dict(
+    type='mmdet.CocoMetric',
+    ann_file='data/json_records/val.json',
+    metric='bbox',
+    format_only=False,
+    backend_args=None)
+test_evaluator = dict(
+    type='mmdet.CocoMetric',
+    ann_file='data/json_records/test.json',
+    metric='bbox',
+    format_only=False,
+    backend_args=None)
